@@ -14,7 +14,6 @@ services:
         src: ./configs/elasticsearch.yml
     deployTo:
       - elk
-
   - name: logstash
     type: docker
     image: logstash
@@ -47,22 +46,6 @@ services:
     configFiles:
       - dest: /usr/share/kibana/config/kibana.yml
         src: ./configs/kibana.yml
-    deployTo:
-      - elk
-
-  - name: web
-    type: nginx
-    version: 1.19
-    ports:
-      - 80
-      - 443
-    remoteAccess: false
-    env:
-      BASICAUTH_KIBANA_USER: null
-      BASICAUTH_KIBANA_PASS: null
-    serviceFiles:
-      - name: kibana
-        src: ./configs/kibana.conf
     deployTo:
       - elk
 
